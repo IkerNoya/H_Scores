@@ -1,5 +1,5 @@
-#include "hscores.h"
 #include <iostream>
+#include "hscores.h"
 using namespace std;
 namespace scores
 {
@@ -16,57 +16,72 @@ namespace scores
 
 	void Score::addScores(int score, string name)
 	{
-
-		for (int i = 0; i < size; i++)
+		if (_scores[_pos] == 0 && _names[_pos] == "n/a")
 		{
-
-			if (_scores[i] == 0 && _names[i] == "n/a")
-			{
-				_scores[i] = score;
-				_names[i] = name;
-			}
-
+			_scores[_pos] = score;
+			_names[_pos] = name;
 		}
+		else
+		{
+		    _pos++;
+			_scores[_pos] = score;
+			_names[_pos] = name;
+		}
+		_pos++;
 	}
+
 	void Score::addScores(int pos, int score, string name)
 	{
 		_scores[pos] = score;
 		_names[pos] = name;
 	}
+
 	void Score::sortScoresH()
 	{
 		int aux;
 		string auxS;
 		for (int i = 0; i < size; i++)
 		{
-			if (_scores[i+1]>_scores[i])
+			
+			for (int j = 0; j < size; j++)
 			{
-				aux = _scores[i];
-				auxS = _names[i];
-				_scores[i] = _scores[i+1];
-				_names[i] = _names[i + 1];
-				_scores[i+1] = aux;
-				_names[i+1] = auxS;
+				if (_scores[i] > _scores[j])
+				{
+					aux = _scores[j];
+					auxS = _names[j];
+					_scores[j] = _scores[i];
+					_names[j] = _names[i];
+					_scores[i] = aux;
+					_names[i] = auxS;
+				}
+
 			}
 		}
 	}
+
 	void Score::sortScoresL()
 	{
 		int aux;
 		string auxS;
 		for (int i = 0; i < size; i++)
 		{
-			if (_scores[i + 1] < _scores[i])
+
+			for (int j = 0; j < size; j++)
 			{
-				aux = _scores[i];
-				auxS = _names[i];
-				_scores[i] = _scores[i + 1];
-				_names[i] = _names[i + 1];
-				_scores[i + 1] = aux;
-				_names[i + 1] = auxS;
+				if (_scores[i] < _scores[j])
+				{
+					aux = _scores[j];
+					auxS = _names[j];
+					_scores[j] = _scores[i];
+					_names[j] = _names[i];
+					_scores[i] = aux;
+					_names[i] = auxS;
+				}
+
 			}
 		}
 	}
+
 	void Score::resetScores() 
 	{
 		for (int i = 0; i < size; i++)
@@ -75,6 +90,7 @@ namespace scores
 			_scores[i] = 0;
 		}
 	}
+
 	void Score::deleteScore(int pos)
 	{
 		_names[pos] = "n/a";

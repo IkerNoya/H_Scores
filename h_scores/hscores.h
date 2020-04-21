@@ -1,5 +1,5 @@
-#ifndef HSCORES_H
-#define HSCORES_H
+#ifndef HSCORES1_H
+#define HSCORES1_H
 #include <string>
 using namespace std;
 namespace scores
@@ -8,12 +8,14 @@ namespace scores
 
 	class Score
 	{
+		int _pos = 0; //used for addScores
+	public:
 		int _scores[size];
 		string _names[size];
-	public:
+
 		Score();
 		~Score();
-
+		
 		void addScores(int score, string name); // Automatically adds the values into the array
 		void addScores(int pos, int score, string name); // Adds the values in a predetermined position in the array
 		void sortScoresH(); // Sorts the array from highest to lowest
@@ -24,4 +26,4 @@ namespace scores
 	};
 }
 
-#endif // !HSCORES_H
+#endif // !HSCORES1_H
